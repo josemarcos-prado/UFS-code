@@ -34,7 +34,8 @@ int insereOrd(int *vetor){
         printf("Digite um numero inteiro: ");
         scanf("%d", &temp);
         while (temp < vetor[i-1] && i > 0) {
-            vetor[i] = vetor[--i];
+            vetor[i] = vetor[i-1];
+            i--;
         }
         vetor[i] = temp;
         quantElem++;
@@ -87,12 +88,12 @@ if(resp != -1){
 return 0;
 }
 
-int remocaoOrd(int *vetor, int elemento) {
-    int resp = pesqBin(vetor, elemento);
-    if(resp != -1) {
-        if(resp < quantElem - 1) {
-            for (int i = resp; i < quantElem - 2; i++) {
-                vetor[i] = vetor [i+1];
+//Função que remove o i-ésimo no de uma lista ordenada
+int removeIOrd(int *vetor, int i) {
+    if (i >= 0 && i < quantElem) {
+        if(i < quantElem - 1) {
+            for (int j = i; j < quantElem - 1; j++) {
+                vetor[j] = vetor[j+1];
             }
             quantElem--;
         }
@@ -102,6 +103,23 @@ int remocaoOrd(int *vetor, int elemento) {
         return 1;
     }
     else 
+        return 0;
+}
+
+//Função que faz a remoção de vetor ordenado
+int remocaoOrd(int *vetor, int elemento) {
+    int resp = pesqBin(vetor, elemento);
+    return removeIOrd(vetor, resp);
+}
+
+//Função que remove o i-esimo no de uma lista não ordenada
+int removeINaoOrd (int *vetor, int i) {
+    if (i >= 0 && i < quantElem){
+        vetor[i] = vetor[quantElem-1];
+        quantElem--;
+        return 1;
+    }
+    else
         return 0;
 }
 
@@ -115,7 +133,7 @@ lista = criaLista();
 
 do{
         printf("\n\n\nEscolha uma opcao\n1 - Insercao nao ordenada\n2 - Pesquisa sequencial");
-        printf("\n3 - Remocao nao ordenada\n4 - Insercao ordenada\n5 - Pesquisa binaria\n9 - Exibir lista \n0 - Sair do programa");
+        printf("\n3 - Remocao nao ordenada\n4 - Insercao ordenada\n5 - Pesquisa binaria\n6 - Remocao ordenada\n7 - Remover no na i-esima posicao (nao ordenado)\n8 - Remover no na i-esima posicao (ordenado)\n9 - Exibir lista \n0 - Sair do programa");
         printf("\nDigite sua opcao: ");
         while(getchar() != '\n');
         scanf("%c",&op);
@@ -138,7 +156,7 @@ do{
                 if(remocaoNaoOrd(lista,aux))
                     printf("\nElemento removido com sucesso.");
                 else
-                    printf("\nFalha na remo��o do elemento.");
+                    printf("\nFalha na remocao do elemento.");
                 break;
         case '4': if (!insereOrd(lista)) 
                     printf("\nLista Cheia. Insercao nao realizada");
@@ -152,6 +170,27 @@ do{
                     printf("\nElemento nao encontrado.");
                 else
                     printf("\nElemento encontrado na posicao %d do vetor.", resp);
+                break;
+        case '6': printf("\nDigite o elemento que deseja remover: ");
+                scanf("%d", &aux);
+                if (remocaoOrd(lista, aux))
+                    printf("\nElemento removido com sucesso");
+                else
+                    printf("\nFalha na remocao do elemento.");
+                break;
+        case '7': printf("\nDigite o indice do elemento a ser removido: ");
+                scanf("%d", &aux);
+                if (removeINaoOrd(lista, aux))
+                    printf("\nElemento removido com sucesso.");
+                else
+                    printf("\nFalha ao remover o elemento no indice %d.", aux);
+                break;
+        case '8': printf("\nDigite o indice do elemento a ser removido: ");
+                scanf("%d", &aux);
+                if (removeIOrd(lista,aux))
+                    printf("\nElemento removido com sucesso.");
+                else 
+                    printf("\nFalha ao remover o elemento no indice %d", aux);
                 break;
         case '9': mostraVetor(lista);
                 break;
