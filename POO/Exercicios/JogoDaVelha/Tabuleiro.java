@@ -1,3 +1,9 @@
+/*  
+    Feito por:
+    José Marcos Bittencourt Oliveira Prado (matrícula 202400017960), e 
+    Sidnei Silva Gonçalves Junior (matricula 202400018369)
+*/
+
 public class Tabuleiro {
     private char [][] grid;
 
@@ -31,7 +37,7 @@ public class Tabuleiro {
         } else return false;
     }
 
-    private boolean existeVencedor () {
+    public boolean existeVencedor () {
         boolean aux = false;
 
         for (int lin = 0; lin < 3; lin++) {
@@ -61,7 +67,7 @@ public class Tabuleiro {
         return aux;
     }
 
-    public boolean empate () {
+    private boolean empate () {
         boolean temVazio = false;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

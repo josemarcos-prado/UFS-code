@@ -1,3 +1,9 @@
+/*  
+    Feito por:
+    José Marcos Bittencourt Oliveira Prado (matricula 202400017960), e 
+    Sidnei Silva Gonçalves Junior (matricula 202400018369)
+*/
+
 import java.util.Random;
 
 public class Main {
@@ -29,7 +35,8 @@ public class Main {
             }
         }
 
-        if (!tab.empate()){
+        System.out.print("\n" + tab.viraString());
+        if (tab.existeVencedor()){
             if (vez%2 == 0)
                 System.out.println("\nO oponente venceu...");
             else 

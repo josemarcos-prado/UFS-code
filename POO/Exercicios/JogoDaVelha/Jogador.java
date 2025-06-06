@@ -1,3 +1,9 @@
+/*  
+    Feito por:
+    José Marcos Bittencourt Oliveira Prado (matrícula 202400017960), e 
+    Sidnei Silva Gonçalves Junior (matricula 202400018369)
+*/
+
 import java.util.Scanner;
 
 public class Jogador {
