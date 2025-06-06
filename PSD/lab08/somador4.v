@@ -12,6 +12,7 @@ module somador4 (
 	output S2, 
 	output S3, 
 	output S4);
+	
 	wire w0, w1, w2;
 	
 	somador_dataflow s0(

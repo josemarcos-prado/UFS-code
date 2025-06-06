@@ -4,6 +4,7 @@ module somador_estrutural(
 	input A,
 	input B,
 	input Cin);
+
 	wire w0, w1 ,w2;
 	xor x1(w0, A, B);
 	xor x2(S, w0, Cin);
