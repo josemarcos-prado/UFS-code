@@ -1,0 +1,111 @@
+//Função que remove um nó pelo nome
+int removePorNome(tipoLista *lista){
+    //Obtem o nome a ser removido
+    char nomerm[128];
+    printf("\nDigite o nome: ");
+    fgets(nomerm, sizeof(nomerm), stdin);
+    nomerm[strcspn(nomerm, "\n")] = '\0';
+
+    //Procura o nome na lista, removendo-o se achar
+    tipoNo *aux = lista->fim;
+    int achou = 0;
+    int tamInicial = lista->quant;
+    for (int i = 0; i < tamInicial; i++){
+        if (!strcmp(nomerm, aux->proxNo->nome)){
+            if (lista->quant == 1){
+                lista->fim = NULL;
+                free(aux);
+                aux = NULL;
+                achou++;
+                lista->quant--;
+            } else {
+                achou++;
+                aux->proxNo = aux->proxNo->proxNo;
+                if (aux->proxNo == lista->fim)
+                    lista->fim = aux->proxNo->proxNo;
+                free(aux->proxNo);
+                lista->quant--;
+            }  
+        }
+        aux = aux->proxNo;
+    }
+
+    //Avisa ao usuario se o nome foi encontrado
+    if (achou == 0){
+        printf("\nNome nao encontrado\n");
+        return 0;
+    } else {
+        printf("\n%d participante(s) removido(s)\n", achou);
+        return 1;
+    }
+}
+
+//Função que remove um nó pelo CPF
+int removePorCPF(tipoLista *lista){
+    //Obtem o CPF a ser removido
+    char cpfrm[16];
+    printf("\nDigite o CPF: ");
+    fgets(cpfrm, sizeof(cpfrm), stdin);
+    cpfrm[strcspn(cpfrm, "\n")] = '\0';
+
+    //Procura o CPF na lista, removendo-o se achar
+    tipoNo *iter = lista->fim;
+    int achou = 0;
+    if (lista->quant == 1){
+        if (!strcmp(cpfrm, iter->cpf)){
+            lista->fim = NULL;
+            free(iter->proxNo);
+            achou++;
+            lista->quant--;
+        }
+    } else { 
+        for (int i = 0; i < lista->quant; i++){
+            tipoNo *aux = iter;
+            if(!strcmp(cpfrm, iter->proxNo->cpf)){
+                achou++;
+                if (iter->proxNo == lista->fim)
+                    lista->fim = iter->proxNo->proxNo;
+                aux = iter->proxNo;
+                iter->proxNo = iter->proxNo->proxNo;
+                free(aux);
+                lista->quant--;
+            }
+            iter = iter->proxNo;
+        }
+    }
+            
+    //Avisa ao usuario se o CPF foi encontrado
+    if (achou == 0){
+        printf("\nCPF nao encontrado\n");
+        return 0;
+    } else {
+        printf("\n%d participante(s) removido(s)\n", achou);
+        return 1;
+    }
+}
+
+int removeNo(tipoLista *lista) {
+    if (!lista->fim){
+        printf("\nA lista ja esta vazia\n");
+        return 0;
+    } else {
+        printf("\n    Como quer identificar o participante a ser removido?");
+        printf("\n1 - Por CPF");
+        printf("\n2 - Por Nome");
+        printf("\nSelecione a sua opcao: ");
+
+        char opcao;   
+        do {
+            scanf("%c", &opcao);
+            getchar();
+            switch(opcao) {
+                case '1': removePorCPF(lista);
+                        break;
+                case '2': removePorNome(lista);
+                        break;
+                default: printf("\nComando nao reconhecido. Insira 1 ou 2: ");
+            }
+        } while(opcao != '1' && opcao != '2');
+        
+    }
+}

@@ -6,6 +6,7 @@
 
 typedef struct no{
 	char name[127];
+	char CPF[13];
 	struct no *proxNo;
 	}tipoNo;
 typedef struct listaCirc{
@@ -25,6 +26,8 @@ void iniciaNome(cabeca *lista){
 		printf("Digite o nome do participante 1:");
 		getchar();
 		fgets(novoNo->name,sizeof(novoNo->name),stdin);
+		printf("Digite o CPF do participante 1:");
+		fgets(novoNo->CPF,sizeof(novoNo->CPF),stdin);
 		novoNo->proxNo=novoNo; 
 		lista->fim=novoNo;
 		lista->quant++;
@@ -36,6 +39,8 @@ void proxPessoas(cabeca *lista,int total){
 				novoNo= (tipoNo*)malloc(sizeof(tipoNo));
 				printf("Digite o nome do participante %d:",i+1);
 				fgets(novoNo->name,sizeof(novoNo->name),stdin);
+				printf("Digite o CPF do participante %d:",i+1);
+				fgets(novoNo->CPF,sizeof(novoNo->CPF),stdin);
 				novoNo->proxNo=lista->fim->proxNo;
 				lista->fim->proxNo=novoNo;
 				lista->fim=novoNo;
@@ -47,6 +52,7 @@ void proxPessoas(cabeca *lista,int total){
 void imprime(cabeca *lista){
 	tipoNo *atual;
 	atual=lista->fim->proxNo;
+	printf("\n   PRESENTES:   \n");
 	do{
 		printf("\n%s",atual->name);
 		atual=atual->proxNo;
@@ -87,7 +93,7 @@ void vitoria(cabeca *lista,int total){
 			ran= sorteia(lista);
 			roletaR(lista,ran);
 		}
-		printf("O vencedor foi:%s\n",lista->fim->name);
+		printf("O vencedor foi:%sCPF:%s\n",lista->fim->name,lista->fim->CPF);
 }
 
 
