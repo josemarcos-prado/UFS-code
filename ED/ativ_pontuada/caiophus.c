@@ -9,6 +9,7 @@ typedef struct no{
 	char CPF[13];
 	struct no *proxNo;
 	}tipoNo;
+	
 typedef struct listaCirc{
 	tipoNo *fim;
 	int quant;
