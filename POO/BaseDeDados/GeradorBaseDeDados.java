@@ -14,18 +14,10 @@ public class GeradorBaseDeDados {
         for (int i = 0; i < numeroDeFuncionarios; i++) {
             int tipoFuncionario = random.nextInt(4);
             switch (tipoFuncionario) {
-                case 0:
-                    funcionarios.add(new AssistenteAdministrativo());
-                    break;
-                case 1:
-                    funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_JUNIOR));
-                    break;
-                case 2:
-                    funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_PLENO));
-                    break;
-                case 3:
-                    funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_SENIOR));
-                    break;
+                case 0 -> funcionarios.add(new AssistenteAdministrativo());
+                case 1 -> funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_JUNIOR));
+                case 2 -> funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_PLENO));
+                case 3 -> funcionarios.add(new Engenheiro(categoria.ENGENHEIRO_SENIOR));
             }
         }
         funcionario[] funcionariosArray = funcionarios.toArray(new funcionario[0]);
